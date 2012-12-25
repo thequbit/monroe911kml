@@ -76,23 +76,6 @@ def get_mysql_credentials():
         #
         return lines
 
-# add the tweet to the database.  We only save a small part of the tweet
-def add_tweet_to_db(text, lat, lng, date, time):
-
-	# get our db info from our local file
-        dbcreds = get_mysql_credentials()
-
-        # decode responce
-        host = dbcreds[0].rstrip()
-        dbname = dbcreds[1].rstrip()
-        username = dbcreds[2].rstrip()
-        password = dbcreds[3].rstrip()
-
-        # connect to our database
-        database = mysql.connect(host=host,user=username,passwd=password,db=dbname)	
-
-	
-
 # pulls the address out of the tweet text
 def decode_address(text):
 	#
@@ -102,15 +85,20 @@ def decode_address(text):
 	# split on the at keyword and take the second part
 	second = text.split(" at ")[1]
 	# split on the ',' and take the first part
-	#addr = second.split(" , ")[0]
-	
-	addr = second
+	street = second.split(" , ")[0]
+	p = second.split(" , ")[1] 
+	town = p[0:p.rfind(" ")]
 
 	# return our decoded address
-	return addr
+	return street + ", " + town + ", NY"
 
 # main function
 def main(argv):
+
+	#addr = decode_address("Odor of smoke at 150 VAN AUKER ST , Rochester City")
+	#print addr
+
+	#sys.exit("nope.")
 
 	#a = "3 Tanglewood Lane, Sandy Hook, CT"
 	#print "Looking up '%s'" % a 
