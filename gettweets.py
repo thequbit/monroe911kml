@@ -160,7 +160,7 @@ def main(argv):
 			# crate query
 			query = 'insert into tweets (tweettext,lat,lng,tweetdate,tweettime) values('
 			query += '"%s", '% tweet.text.encode('utf8')
-			query += "%i, %i, " % (lat,lng)
+			query += "%f, %f, " % (lat,lng)
 			query += '"%s", ' % tweetdate
 			query += '"%s")' % tweettime
 
